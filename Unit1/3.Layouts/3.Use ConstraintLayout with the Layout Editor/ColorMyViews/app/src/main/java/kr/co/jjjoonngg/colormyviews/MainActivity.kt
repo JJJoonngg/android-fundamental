@@ -36,13 +36,13 @@ class MainActivity : AppCompatActivity() {
 
         val clickableViews: List<View> = listOf(
             boxOneText, boxTwoText, boxThreeText,
-            boxFourText, boxFiveText, rootConstraintLayout,
+            boxFourText, boxFiveText,
             redButton, greenButton, yellowButton
         )
 
-        for (item in clickableViews) {
-            item.setOnClickListener {
-                makeColored(it)
+        rootConstraintLayout.setOnClickListener {
+            for (item in clickableViews) {
+                makeColored(item)
             }
         }
     }
@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             R.id.red_button -> boxThreeText.setBackgroundResource(R.color.my_red)
             R.id.yellow_button -> boxFourText.setBackgroundResource(R.color.my_yellow)
             R.id.green_button -> boxFiveText.setBackgroundResource(R.color.my_green)
-            else -> view.setBackgroundColor(Color.LTGRAY)
         }
     }
 }
