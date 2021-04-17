@@ -44,12 +44,20 @@ class GameViewModel : ViewModel() {
         DateUtils.formatElapsedTime(time)
     }
 
-    init {
-        resetList()
-        nextWord()
+    // The Hint for the current word
+    val wordHint = Transformations.map(word) { word ->
+        val randomPosition = (1..word.length).random()
+        "Current word has " + word.length + " letters" +
+                "\nThe letter at position " + randomPosition + " is " +
+                word.get(randomPosition - 1).toUpperCase()
+    }
 
+    init {
         _word.value = ""
         _score.value = 0
+
+        resetList()
+        nextWord()
 
         // Creates a timer which triggers the end of the game when it finishes
         timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
